@@ -50,9 +50,9 @@ export async function getUser(condition: Partial<UserType> = {}): Promise<ApiRes
     await connect();
     const users = await User.find(condition).lean();
     // Convert MongoDB documents to plain objects and serialize _id
-    const serializedUsers = users.map((user: any) => ({
+    const serializedUsers: any[] = users.map((user: any) => ({
       ...user,
-      _id: user._id.toString(),
+      _id: user._id?.toString(),
       createdAt: user.createdAt?.toISOString(),
       updatedAt: user.updatedAt?.toISOString(),
     }));
@@ -80,11 +80,11 @@ export async function getUserById(condition: Partial<UserType>): Promise<ApiResp
       };
     }
     // Serialize the user object
-    const serializedUser = {
+    const serializedUser: any = {
       ...user,
-      _id: user._id.toString(),
-      createdAt: user.createdAt?.toISOString(),
-      updatedAt: user.updatedAt?.toISOString(),
+      _id: (user as any)._id.toString(),
+      createdAt: (user as any).createdAt?.toISOString(),
+      updatedAt: (user as any).updatedAt?.toISOString(),
     };
     return {
       success: true,
@@ -189,9 +189,9 @@ export async function getProfessors(): Promise<ApiResponse<Professor[]>> {
     const professors = await User.find({ type: "professor" }).lean();
 
     // Serialize the professors
-    const serializedProfessors = professors.map((prof: any) => ({
+    const serializedProfessors: any[] = professors.map((prof: any) => ({
       ...prof,
-      _id: prof._id.toString(),
+      _id: prof._id?.toString(),
       createdAt: prof.createdAt?.toISOString(),
       updatedAt: prof.updatedAt?.toISOString(),
       department: prof.data?.department || "",
@@ -201,7 +201,7 @@ export async function getProfessors(): Promise<ApiResponse<Professor[]>> {
 
     return {
       success: true,
-      data: serializedProfessors as Professor[]
+      data: serializedProfessors
     };
   } catch (error: any) {
     console.error("Error fetching professors:", error);
