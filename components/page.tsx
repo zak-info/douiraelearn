@@ -406,8 +406,8 @@ export default function ElNourDashboard() {
 
           {/* Modal */}
           {isModalOpen && (
-            <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-              <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div className="fixed text-black inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+              <div className="bg-white text-black p-6 rounded-xl shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-gray-800">
                     {isEditMode ? "Modifier le Professeur" : "Ajouter un Professeur"}
@@ -571,7 +571,7 @@ export default function ElNourDashboard() {
                       Sexe
                     </label>
                     <select
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 outline-none"
+                      className="w-full p-2 h-10 border bg-white border-white rounded-lg focus:ring-2 focus:ring-yellow-500 outline-none"
                       value={formData.sex || ""}
                       onChange={(e) =>
                         setFormData({
